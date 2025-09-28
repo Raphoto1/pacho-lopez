@@ -3,10 +3,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 export default function VideoGrid() {
-  const playlistId = "PLEaHpsZJ9wc7DeXLgxp94uDYE8bFbdHs0";
-  const apiKey = "AIzaSyAV5hiBD0I_7xnDTSrgTjgpnxSkIbDqKQI";
+  const playlistId = process.env.NEXT_PUBLIC_YOUTUBE_PLAYLIST_ID;
+  const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+
   const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${playlistId}&key=${apiKey}`;
   const [videos, setVideos] = useState([]);
+  console.log(playlistId);
 
   useEffect(() => {
     fetch(url)
@@ -28,7 +30,7 @@ export default function VideoGrid() {
       <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
         {videos.map((video) => (
           <div key={video.id} className='card shadow-xl'>
-            <iframe className="rounded-lg" src={`https://www.youtube.com/embed/${video.id}`} width='100%' height='315' frameBorder='0' allowFullScreen />
+            <iframe className='rounded-lg' src={`https://www.youtube.com/embed/${video.id}`} width='100%' height='315' frameBorder='0' allowFullScreen />
           </div>
         ))}
       </div>
