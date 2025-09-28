@@ -46,7 +46,7 @@ export default function HeroImage() {
         </div>
       </div>
       <div className='w-20 h-20 absolute end-10 bottom-10'>
-        <a href='https://wa.me/4731520717?' target='_blank'>
+        <a href='https://wa.me/5214731520717?' target='_blank'>
           <img src='/icons/WhatsApp.svg.webp' alt='' />
         </a>
       </div>
