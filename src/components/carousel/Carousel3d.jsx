@@ -51,7 +51,7 @@ export default function Carousel3d() {
         <div ref={carouselRef} className='carousel carousel-center rounded-box w-full space-x-4 px-4 py-6 overflow-x-auto scroll-smooth'>
           {images.map((src, index) => (
             <div key={index} className='carousel-item flex-shrink-0'>
-              <img src={src} alt={`Slide ${index + 1}`} className='rounded-box w-[300px] h-[300px] object-cover' />
+              <img src={src} alt={`Slide ${index + 1}`} className='rounded-box rounded-2xl w-[300px] h-[300px] object-cover' />
             </div>
           ))}
         </div>
