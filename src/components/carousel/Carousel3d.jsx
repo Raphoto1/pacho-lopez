@@ -40,25 +40,27 @@ export default function Carousel3d() {
   };
 
   return (
-    <div className='w-full flex justify-center relative'>
-      {/* Flecha izquierda */}
-      <button onClick={scrollLeft} className='absolute left-2 top-1/2 -translate-y-1/2 btn btn-circle z-10'>
-        ❮
-      </button>
-
-      {/* Carrusel horizontal */}
-      <div ref={carouselRef} className='carousel carousel-center rounded-box w-full space-x-4 px-4 py-6 overflow-x-auto scroll-smooth'>
-        {images.map((src, index) => (
-          <div key={index} className='carousel-item flex-shrink-0'>
-            <img src={src} alt={`Slide ${index + 1}`} className='rounded-box w-[300px] h-[200px] object-cover' />
-          </div>
-        ))}
+<div className="flex justify-center">
+      <div className='w-3/4 flex justify-center relative'>
+        {/* Flecha izquierda */}
+        <button onClick={scrollLeft} className='absolute left-2 top-1/2 -translate-y-1/2 btn btn-circle z-10'>
+          ❮
+        </button>
+  
+        {/* Carrusel horizontal */}
+        <div ref={carouselRef} className='carousel carousel-center rounded-box w-full space-x-4 px-4 py-6 overflow-x-auto scroll-smooth'>
+          {images.map((src, index) => (
+            <div key={index} className='carousel-item flex-shrink-0'>
+              <img src={src} alt={`Slide ${index + 1}`} className='rounded-box w-[300px] h-[300px] object-cover' />
+            </div>
+          ))}
+        </div>
+  
+        {/* Flecha derecha */}
+        <button onClick={scrollRight} className='absolute right-2 top-1/2 -translate-y-1/2 btn btn-circle z-10'>
+          ❯
+        </button>
       </div>
-
-      {/* Flecha derecha */}
-      <button onClick={scrollRight} className='absolute right-2 top-1/2 -translate-y-1/2 btn btn-circle z-10'>
-        ❯
-      </button>
-    </div>
+</div>
   );
 }

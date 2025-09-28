@@ -47,7 +47,7 @@ export default function CarouselLong() {
           <button
             key={index}
             onClick={() => setActiveIndex(index)}
-            className={`btn btn-xs rounded-full border-1 border-white ${
+            className={`btn btn-xs rounded-full w-4 h-4 border-1 border-white ${
               index === activeIndex ? 'bg-white' : 'bg-base-300'
             }`}
           />

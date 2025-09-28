@@ -24,11 +24,11 @@ export default function VideoGrid() {
 
   return (
     <div className='flex flex-col justify-center items-center pb-2'>
-      <h2 className='text-2xl font-bold'>Nuestra Lista en Youtube</h2>
+      <h2 className='text-2xl font-bold pb-2'>Nuestra Lista en Youtube</h2>
       <div className='grid grid-cols-1 md:grid-cols-4 gap-2'>
         {videos.map((video) => (
-          <div key={video.id} className='card'>
-            <iframe src={`https://www.youtube.com/embed/${video.id}`} width='100%' height='315' frameBorder='0' allowFullScreen />
+          <div key={video.id} className='card shadow-xl'>
+            <iframe className="rounded-lg" src={`https://www.youtube.com/embed/${video.id}`} width='100%' height='315' frameBorder='0' allowFullScreen />
           </div>
         ))}
       </div>
