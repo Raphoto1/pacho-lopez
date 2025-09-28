@@ -1,30 +1,35 @@
 import React from "react";
+import Link from "next/link";
 
 export default function NavBar() {
   const menuItems = [
+      {
+      title: "home",
+      link: "/",
+    },
     {
       title: "Noticias",
-      link: "link",
+      link: "/news",
     },
     {
       title: "Biografía",
-      link: "link",
+      link: "/bio",
     },
     {
       title: "Música",
-      link: "link",
+      link: "/music",
     },
     {
       title: "Videos",
-      link: "link",
+      link: "/videos",
     },
     {
       title: "Tour",
-      link: "link",
+      link: "/tour",
     },
     {
       title: "Tienda",
-      link: "link",
+      link: "/shop",
     },
     {
       title: "Contacto",
@@ -44,7 +49,7 @@ export default function NavBar() {
           <ul tabIndex={0} className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'>
             {menuItems.map((item, index) => (
               <li key={index}>
-                <a className="uppercase">{item.title}</a>
+                <Link href={item.link} replace className="uppercase">{item.title}</Link>
               </li>
             ))}
           </ul>
@@ -54,7 +59,7 @@ export default function NavBar() {
         <ul className='menu menu-horizontal flex w-full justify-around px-50'>
           {menuItems.map((item, index) => (
             <li key={index}>
-              <a className="uppercase">{item.title}</a>
+              <Link href={item.link} replace className="uppercase">{item.title}</Link>
             </li>
           ))}
         </ul>
