@@ -10,7 +10,7 @@ import { FaDeezer } from "react-icons/fa";
 import { FiYoutube } from "react-icons/fi";
 export default function HeroImage() {
   return (
-    <div
+    <section
       className='hero min-h-screen'
       style={{
         backgroundImage: "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
@@ -50,6 +50,6 @@ export default function HeroImage() {
           <img src='/icons/WhatsApp.svg.webp' alt='' />
         </a>
       </div>
-    </div>
+    </section>
   );
 }

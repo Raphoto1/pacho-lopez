@@ -5,7 +5,7 @@ import { FaTiktok } from "react-icons/fa";
 import { FiYoutube } from "react-icons/fi";
 export default function SocialBar() {
   return (
-    <div className='flex w-full justify-center py-4'>
+    <section className='flex w-full justify-center py-4'>
       <a href='https://www.youtube.com/@pacholopezoficial' target='_blank' className=' bg-gray-800/50 rounded-full p-4'>
         <FiYoutube size={25} />
       </a>
@@ -18,6 +18,6 @@ export default function SocialBar() {
       <a href='https://www.youtube.com/' target='_blank' className=' bg-gray-800/50 rounded-full p-4'>
         <FaTiktok size={30} />
       </a>
-    </div>
+    </section>
   );
 }

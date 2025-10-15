@@ -33,7 +33,7 @@ export default function NavBar() {
     },
     {
       title: "Contacto",
-      link: "link",
+      link: "/contact",
     },
   ];
   return (
