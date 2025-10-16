@@ -76,7 +76,7 @@ export default function ContactPage() {
               value={formData.name}
               onChange={handleChange}
               required
-              className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+              className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black'
               placeholder='Tu nombre completo'
             />
           </div>
@@ -92,7 +92,7 @@ export default function ContactPage() {
               value={formData.email}
               onChange={handleChange}
               required
-              className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+              className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black'
               placeholder='tu@email.com'
             />
           </div>
