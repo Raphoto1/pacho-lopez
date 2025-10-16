@@ -60,11 +60,11 @@ export default function ContactPage() {
     }
   };
   return (
-    <div className='flex min-h-screen py-12 px-4 sm:px-6 lg:px-8 justify-center items-center'>
-      <div className='max-w-md mx-auto bg-white rounded-lg shadow-md p-6'>
+    <div className='flex min-h-screen py-12 px-4 sm:px-6 md:px-8 w-full justify-center items-center'>
+      <div className=' bg-white rounded-lg shadow-md p-6'>
         <h1 className='text-2xl font-bold text-gray-900 text-center mb-8'>Contacto</h1>
 
-        <form onSubmit={handleSubmit} className='space-y-6'>
+        <form onSubmit={handleSubmit} className='space-y-6 w-full md:w-96'>
           <div>
             <label htmlFor='name' className='block text-sm font-medium text-gray-700 mb-1'>
               Nombre *
@@ -122,6 +122,11 @@ export default function ContactPage() {
 
           {submitStatus && <div className={`text-center text-sm ${submitStatus.includes("Error") ? "text-red-600" : "text-green-600"}`}>{submitStatus}</div>}
         </form>
+      </div>
+      <div className='bottom-10 w-20 fixed right-10 flex flex-col gap-4'>
+        <a href='https://wa.me/5214731520717?' target='_blank'>
+          <img src='/icons/WhatsApp.svg.webp' alt='' />
+        </a>
       </div>
     </div>
   );

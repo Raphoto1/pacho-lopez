@@ -8,18 +8,25 @@ import { SiAmazonmusic } from "react-icons/si";
 import { RiSoundcloudLine } from "react-icons/ri";
 import { FaDeezer } from "react-icons/fa";
 import { FiYoutube } from "react-icons/fi";
-
 export default function HeroImage() {
   return (
-    <section className='hero min-h-screen relative z-0'>
-      <div className='hero-overlay absolute inset-0'>
-        <img 
-          src='/img/photos/pacho2.jpg' 
-          alt='artist' 
-          className="w-full h-full object-cover"
-        />
+    <section
+      className='hero min-h-screen'
+      style={{
+        backgroundImage: "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
+      }}>
+      <div className='hero-overlay'>
+        <iframe
+          className='w-full h-[100vh]'
+          width='560'
+          height='315'
+          src='https://www.youtube.com/embed/moYxfggIQkc?si=R2RopSEHjoCW57W-&autoplay=1&mute=1&loop=1'
+          title='YouTube video player'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+          referrerPolicy='strict-origin-when-cross-origin'
+          allowFullScreen></iframe>
       </div>
-      <div className='hero-content w-full justify-start relative z-10'>
+      <div className='hero-content w-full justify-start'>
         <div className='flex flex-col gap-4'>
           <a href='https://open.spotify.com/intl-es/track/4bgvm7beLzAIs8N5tt6mEt?si=32cb193f0a564076' target='_blank' className='bg-fit bg-gray-800/50 rounded-full p-2'>
             <AiOutlineSpotify size={25} />
@@ -38,11 +45,11 @@ export default function HeroImage() {
           </a>
         </div>
       </div>
-      <div className='w-20 h-20 absolute end-10 bottom-10 z-10'>
+      {/* <div className='w-20 h-20 absolute end-10 bottom-10'>
         <a href='https://wa.me/5214731520717?' target='_blank'>
           <img src='/icons/WhatsApp.svg.webp' alt='' />
         </a>
-      </div>
+      </div> */}
     </section>
   );
 }

@@ -37,7 +37,7 @@ export default function NavBar() {
     },
   ];
   return (
-    <div className='navba absolute shadow-sm bg-gray-800/50 flex w-full'>
+    <div className='navbar fixed top-0 shadow-sm bg-gray-800/50 flex w-full z-50'>
       <div className='navbar-end lg:hidden w-full pr-5'>
         <div className='dropdown dropdown-center'>
           <div tabIndex={0} role='button' className='btn btn-ghost'>
