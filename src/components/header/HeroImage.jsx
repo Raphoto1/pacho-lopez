@@ -9,12 +9,12 @@ import { RiSoundcloudLine } from "react-icons/ri";
 import { FaDeezer } from "react-icons/fa";
 import { FiYoutube } from "react-icons/fi";
 
-export default function HeroImage() {
+export default function HeroImage({ imageUrl }) {
   return (
     <section className='hero min-h-screen relative z-0'>
       <div className='hero-overlay absolute inset-0'>
         <img 
-          src='/img/photos/pacho2.jpg' 
+          src={imageUrl || '/img/photos/pacho2.jpg'}
           alt='artist' 
           className="w-full h-full object-cover"
         />

@@ -11,12 +11,11 @@ import CarouselHalf2 from "@/components/carousel/CarouselHalf2";
 export default function Home() {
   return (
     <div>
-      <HeroVideo />
+      <HeroImage imageUrl='/img/posters/posterWide.png' />
       <SocialBar />
+      <HeroVideo />
       <CarouselHalf />
       <CarouselHalf2 />
-      {/* <CarouselLong />
-      <Carousel3d /> */}
       <VideoGrid />
     </div>
   );

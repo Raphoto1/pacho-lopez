@@ -3,7 +3,7 @@ import HeroImage from "@/components/header/HeroImage";
 export default function page() {
   return (
     <div>
-      <HeroImage />
+      <HeroImage imageUrl='/img/posters/posterWide.png' />
     </div>
   );
 }

@@ -6,16 +6,17 @@ export default function BioWithPhoto() {
       <h1 className='title text-4xl'>Biografía</h1>
       <div className='md:flex md:flex-row flex-col w-auto h-auto justify-center bg-white p-4 rounded-lg shadow-md mt-4 '>
         <div className='w-1/3 h-auto rounded-md'>
-          <img src='/img/photos/pacho2.jpg' alt='artist' className="rounded-md"/>
+          <img src='/img/photos/pacho2.jpg' alt='artist' className='rounded-md' />
         </div>
         <div className='md:w-2/3 h-auto md:p-4 flex items-center'>
           <p className='text-black font-medium text-justify'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eveniet, laboriosam provident nesciunt quisquam doloremque ad itaque expedita
-            magnam eaque minus sint ipsam aliquid, ipsum tempora eos magni corporis autem dolorem architecto reiciendis. Aut quas fugiat pariatur ut recusandae
-            eaque praesentium neque accusantium mollitia consequuntur, impedit ullam reiciendis numquam ab unde eius tempora omnis tenetur non maiores
-            architecto nobis nihil labore. Ullam odio inventore sint iste voluptatem nisi iure explicabo laboriosam officia, fugiat incidunt. Corrupti hic
-            architecto inventore ab explicabo praesentium quibusdam nulla iure eligendi illo, labore omnis autem excepturi! Facilis distinctio quia inventore
-            animi provident quis dolorem fugit libero?
+            Pacho López y La “Cumbia-Mestiza” es un proyecto musical creado por el artista colombiano e inquilino del mundo Pacho López Parra en el año 2011,
+            después de haber fundado y participado como guitarrista y corista de la banda de ska bogotana The Klaxon durante 11 años. Se junta con nuevos amigos
+            músicos, para llevar a cabo su proyecto personal después de estar en su última gira por la costa de la British Columbia (Canadá), donde gracias a la
+            lejanía con su tierra natal colombiana, se adentra en su cultura, por medio de la música involucrándose con la cumbia y todos sus ritmos mestizos,
+            dándole origen a su gran agrupación: “Cumbia Mestiza" En el 2015 la Banda fue a Argentina,Chile y Mexico lanzando su más reciente trabajo discográfico
+            titulado Rayo de Luz – La Voz del Alma. En su horizonte más cercano, pretenden seguir difundiendo su música por Hispanoamérica y Europa, para
+            realizar presentaciones de su más reciente album “PARCEROS”, producido en Guanajuato Capital - Mexico.
           </p>
         </div>
       </div>
