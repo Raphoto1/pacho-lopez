@@ -8,7 +8,6 @@ export default function VideoGrid() {
 
   const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${playlistId}&key=${apiKey}`;
   const [videos, setVideos] = useState([]);
-  console.log(playlistId);
 
   useEffect(() => {
     fetch(url)
@@ -18,8 +17,6 @@ export default function VideoGrid() {
           id: item.snippet.resourceId.videoId,
           title: item.snippet.title,
         }));
-        console.log(parsed);
-
         setVideos(parsed);
       });
   }, []);
