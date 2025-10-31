@@ -7,14 +7,15 @@ import SocialBar from "@/components/bar/SocialBar";
 import HeroVideo from "@/components/header/HeroVideo";
 import CarouselHalf from "@/components/carousel/CarouselHalf";
 import CarouselHalf2 from "@/components/carousel/CarouselHalf2";
+import CarouselBanners from "@/components/carousel/CarouselBanners";
 
 export default function Home() {
   return (
     <div>
       <HeroImage imageUrl='/img/posters/posterWide.png' />
       <SocialBar />
+      <CarouselBanners />
       <HeroVideo />
-      <CarouselHalf />
       <CarouselHalf2 />
       <VideoGrid />
     </div>
