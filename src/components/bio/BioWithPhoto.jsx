@@ -4,11 +4,11 @@ export default function BioWithPhoto() {
   return (
     <div className='flex flex-col md:w-10/12'>
       <h1 className='title text-4xl'>Biografía</h1>
-      <div className='flex w-auto h-auto justify-center bg-white p-4 rounded-lg shadow-md mt-4 '>
+      <div className='md:flex md:flex-row flex-col w-auto h-auto justify-center bg-white p-4 rounded-lg shadow-md mt-4 '>
         <div className='w-1/3 h-auto rounded-md'>
           <img src='/img/photos/pacho2.jpg' alt='artist' className="rounded-md"/>
         </div>
-        <div className='w-2/3 h-auto p-4 flex items-center'>
+        <div className='md:w-2/3 h-auto md:p-4 flex items-center'>
           <p className='text-black font-medium text-justify'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eveniet, laboriosam provident nesciunt quisquam doloremque ad itaque expedita
             magnam eaque minus sint ipsam aliquid, ipsum tempora eos magni corporis autem dolorem architecto reiciendis. Aut quas fugiat pariatur ut recusandae

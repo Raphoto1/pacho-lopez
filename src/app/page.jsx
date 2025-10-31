@@ -5,15 +5,18 @@ import Carousel3d from "@/components/carousel/Carousel3d";
 import VideoGrid from "@/components/grid/VideoGrid";
 import SocialBar from "@/components/bar/SocialBar";
 import HeroVideo from "@/components/header/HeroVideo";
+import CarouselHalf from "@/components/carousel/CarouselHalf";
+import CarouselHalf2 from "@/components/carousel/CarouselHalf2";
 
 export default function Home() {
   return (
     <div>
-      <HeroImage />
+      <HeroVideo />
       <SocialBar />
-      <CarouselLong />
-            <HeroVideo />
-      <Carousel3d />
+      <CarouselHalf />
+      <CarouselHalf2 />
+      {/* <CarouselLong />
+      <Carousel3d /> */}
       <VideoGrid />
     </div>
   );
