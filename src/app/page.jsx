@@ -12,10 +12,10 @@ import CarouselBanners from "@/components/carousel/CarouselBanners";
 export default function Home() {
   return (
     <div>
-      <HeroImage imageUrl='/img/posters/posterWide.png' />
+      {/* <HeroImage imageUrl='/img/posters/posterWide.png' /> */}
+      <HeroVideo />
       <SocialBar />
       <CarouselBanners />
-      <HeroVideo />
       <CarouselHalf2 />
       <VideoGrid />
     </div>
