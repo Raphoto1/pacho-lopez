@@ -24,7 +24,7 @@ export default function VideoGrid() {
   }, []);
 
   return (
-    <div className='flex flex-col justify-center items-center pb-2'>
+    <div className='flex flex-col justify-center items-center py-4'>
       <h2 className='text-2xl font-bold pb-2'>{t('title')}</h2>
       <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
         {videos.map((video) => (

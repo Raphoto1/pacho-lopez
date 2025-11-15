@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MusicPlayer() {
   return (
-    <div>
+    <div className="p-4">
 
       <iframe
         data-testid='embed-iframe'
