@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from 'next-intl';
 
 export default function ContactPage() {
+  const t = useTranslations('Contact');
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,30 +46,30 @@ export default function ContactPage() {
           return response.json();
         })
         .then((data) => {
-          setSubmitStatus("¡Mensaje enviado correctamente!");
+          setSubmitStatus(t('successMessage'));
           setFormData({ name: "", email: "", message: "" });
         })
         .catch((error) => {
-          setSubmitStatus("Error al enviar el mensaje. Inténtalo de nuevo.");
+          setSubmitStatus(t('errorMessage'));
         })
         .finally(() => {
           setIsSubmitting(false);
         });
     } catch (error) {
       console.error("Error enviando el formulario:", error);
-      setSubmitStatus("Error al enviar el mensaje. Inténtalo de nuevo.");
+      setSubmitStatus(t('errorMessage'));
       setIsSubmitting(false);
     }
   };
   return (
     <div className='flex min-h-screen py-12 px-4 sm:px-6 md:px-8 w-full justify-center items-center'>
       <div className=' bg-white rounded-lg shadow-md p-6'>
-        <h1 className='text-2xl font-bold text-gray-900 text-center mb-8'>Contacto</h1>
+        <h1 className='text-2xl font-bold text-gray-900 text-center mb-8'>{t('title')}</h1>
 
         <form onSubmit={handleSubmit} className='space-y-6 w-full md:w-96'>
           <div>
             <label htmlFor='name' className='block text-sm font-medium text-gray-700 mb-1'>
-              Nombre *
+              {t('nameLabel')} *
             </label>
             <input
               type='text'
@@ -77,13 +79,13 @@ export default function ContactPage() {
               onChange={handleChange}
               required
               className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black'
-              placeholder='Tu nombre completo'
+              placeholder={t('namePlaceholder')}
             />
           </div>
 
           <div>
             <label htmlFor='email' className='block text-sm font-medium text-gray-700 mb-1'>
-              Email *
+              {t('emailLabel')} *
             </label>
             <input
               type='email'
@@ -93,13 +95,13 @@ export default function ContactPage() {
               onChange={handleChange}
               required
               className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black'
-              placeholder='tu@email.com'
+              placeholder={t('emailPlaceholder')}
             />
           </div>
 
           <div>
             <label htmlFor='message' className='block text-sm font-medium text-gray-700 mb-1'>
-              Mensaje *
+              {t('messageLabel')} *
             </label>
             <textarea
               id='message'
@@ -109,7 +111,7 @@ export default function ContactPage() {
               required
               rows={4}
               className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-vertical text-black'
-              placeholder='Escribe tu mensaje aquí...'
+              placeholder={t('messagePlaceholder')}
             />
           </div>
 
@@ -117,7 +119,7 @@ export default function ContactPage() {
             type='submit'
             disabled={isSubmitting}
             className='w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200'>
-            {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
+            {isSubmitting ? t('submittingButton') : t('submitButton')}
           </button>
 
           {submitStatus && <div className={`text-center text-sm ${submitStatus.includes("Error") ? "text-red-600" : "text-green-600"}`}>{submitStatus}</div>}

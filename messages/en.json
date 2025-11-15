@@ -1,0 +1,56 @@
+{
+  "HomePage": {
+    "title": "Hello world!"
+  },
+  "NavBar": {
+    "home": "home",
+    "news": "news",
+    "bio": "bio",
+    "music": "music",
+    "videos": "videos",
+    "live": "live",
+    "tour": "tour",
+    "shop": "shop",
+    "contact": "contact"
+  },
+  "VideoGrid": {
+    "title": "Youtube Playlist"
+  },
+  "Footer": {
+    "rights": "All rights reserved."
+  },
+  "Bio": {
+    "title": "Biography",
+    "paragraph1": "Pacho López y La \"Cumbia-Mestiza\" is a musical project created by Colombian artist and world citizen Pacho López Parra in 2011, after having founded and participated as guitarist and backing vocalist of the Bogota ska band The Klaxon for 11 years. He joined forces with new musician friends to carry out his personal project after being on his last tour along the coast of British Columbia (Canada), where thanks to the distance from his native Colombian land, he delved into his culture through music, getting involved with cumbia and all its mestizo rhythms, giving origin to his great group: \"Cumbia Mestiza\"",
+    "paragraph2": "In 2015 the Band went to Argentina, Chile and Mexico launching their most recent album titled Rayo de Luz – La Voz del Alma.",
+    "paragraph3": "In their near horizon, they intend to continue spreading their music throughout Latin America and Europe, to perform their most recent album \"PARCEROS\", produced in Guanajuato Capital - Mexico."
+  },
+  "Newsletter": {
+    "title": "Subscribe to our Newsletter",
+    "description": "Get the latest news and updates directly in your inbox",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "submitButton": "Subscribe",
+    "submittingButton": "Subscribing...",
+    "successMessage": "You have successfully subscribed!",
+    "errorMessage": "Error subscribing. Please try again."
+  },
+  "ShopPage": {
+    "title": "Get them on our WhatsApp"
+  },
+  "Contact": {
+    "title": "Contact",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "namePlaceholder": "Your full name",
+    "emailPlaceholder": "your@email.com",
+    "messagePlaceholder": "Write your message here...",
+    "submitButton": "Send Message",
+    "submittingButton": "Sending...",
+    "successMessage": "Message sent successfully!",
+    "errorMessage": "Error sending message. Please try again."
+  }
+}

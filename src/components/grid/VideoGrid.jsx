@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function VideoGrid() {
+  const t = useTranslations("VideoGrid");
   const playlistId = process.env.NEXT_PUBLIC_YOUTUBE_PLAYLIST_ID;
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
@@ -23,7 +25,7 @@ export default function VideoGrid() {
 
   return (
     <div className='flex flex-col justify-center items-center pb-2'>
-      <h2 className='text-2xl font-bold pb-2'>Nuestra Lista en Youtube</h2>
+      <h2 className='text-2xl font-bold pb-2'>{t('title')}</h2>
       <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
         {videos.map((video) => (
           <div key={video.id} className='card shadow-xl'>

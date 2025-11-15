@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function NewsLetterSuscriptionForm() {
+  const t = useTranslations('Newsletter')
   const [formData, setFormData] = useState({
     name: '',
     email: ''
@@ -37,11 +39,11 @@ export default function NewsLetterSuscriptionForm() {
       }
 
       const data = await response.json()
-      setSubmitStatus('¡Te has suscrito correctamente!')
+      setSubmitStatus(t('successMessage'))
       setFormData({ name: '', email: '' })
     } catch (error) {
       console.error('Error suscribiendo al newsletter:', error)
-      setSubmitStatus('Error al suscribirse. Inténtalo de nuevo.')
+      setSubmitStatus(t('errorMessage'))
     } finally {
       setIsSubmitting(false)
     }
@@ -50,16 +52,16 @@ export default function NewsLetterSuscriptionForm() {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
       <h2 className="text-xl font-bold text-gray-900 text-center mb-4">
-        Suscríbete a nuestro Newsletter
+        {t('title')}
       </h2>
       <p className="text-gray-600 text-center mb-6 text-sm">
-        Recibe las últimas noticias y actualizaciones directamente en tu correo
+        {t('description')}
       </p>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="newsletter-name" className="block text-sm font-medium text-gray-700 mb-1">
-            Nombre *
+            {t('nameLabel')} *
           </label>
           <input
             type="text"
@@ -69,13 +71,13 @@ export default function NewsLetterSuscriptionForm() {
             onChange={handleChange}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
-            placeholder="Tu nombre"
+            placeholder={t('namePlaceholder')}
           />
         </div>
 
         <div>
           <label htmlFor="newsletter-email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email *
+            {t('emailLabel')} *
           </label>
           <input
             type="email"
@@ -85,7 +87,7 @@ export default function NewsLetterSuscriptionForm() {
             onChange={handleChange}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
-            placeholder="tu@email.com"
+            placeholder={t('emailPlaceholder')}
           />
         </div>
 
@@ -94,7 +96,7 @@ export default function NewsLetterSuscriptionForm() {
           disabled={isSubmitting}
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
         >
-          {isSubmitting ? 'Suscribiendo...' : 'Suscribirse'}
+          {isSubmitting ? t('submittingButton') : t('submitButton')}
         </button>
 
         {submitStatus && (

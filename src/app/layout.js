@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 import NavBar from "@/components/nav/NavBar";
 import Footer from "@/components/footer/Footer";
@@ -19,21 +21,21 @@ export const metadata = {
   description: "Pacho Lopez Y La Cumbia Mestiza - Sitio Oficial",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const messages = await getMessages();
+  
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
-        <link rel="stylesheet" href="https://use.typekit.net/ank1ghx.css" />
+        <link rel='stylesheet' href='https://use.typekit.net/ank1ghx.css' />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
-      >
-      <NavBar/>
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer/>
-      </body>
+      <NextIntlClientProvider messages={messages}>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
+          <NavBar />
+          <main className='flex-1 lg:pt-16'>{children}</main>
+          <Footer />
+        </body>
+      </NextIntlClientProvider>
     </html>
   );
 }

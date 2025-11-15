@@ -1,0 +1,56 @@
+{
+  "HomePage": {
+    "title": "¡Hola mundo!"
+  },
+  "NavBar": {
+    "home": "inicio",
+    "news": "noticias",
+    "bio": "biografía",
+    "music": "música",
+    "videos": "videos",
+    "live": "en vivo",
+    "tour": "tour",
+    "shop": "tienda",
+    "contact": "contacto"
+  },
+    "VideoGrid": {
+    "title": "Nuestra Lista en Youtube"
+  },
+    "Footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "Bio": {
+    "title": "Biografía",
+    "paragraph1": "Pacho López y La \"Cumbia-Mestiza\" es un proyecto musical creado por el artista colombiano e inquilino del mundo Pacho López Parra en el año 2011, después de haber fundado y participado como guitarrista y corista de la banda de ska bogotana The Klaxon durante 11 años. Se junta con nuevos amigos músicos, para llevar a cabo su proyecto personal después de estar en su última gira por la costa de la British Columbia (Canadá), donde gracias a la lejanía con su tierra natal colombiana, se adentra en su cultura, por medio de la música involucrándose con la cumbia y todos sus ritmos mestizos, dándole origen a su gran agrupación: \"Cumbia Mestiza\"",
+    "paragraph2": "En el 2015 la Banda fue a Argentina, Chile y Mexico lanzando su más reciente trabajo discográfico titulado Rayo de Luz – La Voz del Alma.",
+    "paragraph3": "En su horizonte más cercano, pretenden seguir difundiendo su música por Hispanoamérica y Europa, para realizar presentaciones de su más reciente album \"PARCEROS\", producido en Guanajuato Capital - Mexico."
+  },
+  "Newsletter": {
+    "title": "Suscríbete a nuestro Newsletter",
+    "description": "Recibe las últimas noticias y actualizaciones directamente en tu correo",
+    "nameLabel": "Nombre",
+    "emailLabel": "Email",
+    "namePlaceholder": "Tu nombre",
+    "emailPlaceholder": "tu@email.com",
+    "submitButton": "Suscribirse",
+    "submittingButton": "Suscribiendo...",
+    "successMessage": "¡Te has suscrito correctamente!",
+    "errorMessage": "Error al suscribirse. Inténtalo de nuevo."
+  },
+    "ShopPage": {
+    "title": "Pidelos en Nuestro Whatsapp"
+  },
+  "Contact": {
+    "title": "Contacto",
+    "nameLabel": "Nombre",
+    "emailLabel": "Email",
+    "messageLabel": "Mensaje",
+    "namePlaceholder": "Tu nombre completo",
+    "emailPlaceholder": "tu@email.com",
+    "messagePlaceholder": "Escribe tu mensaje aquí...",
+    "submitButton": "Enviar Mensaje",
+    "submittingButton": "Enviando...",
+    "successMessage": "¡Mensaje enviado correctamente!",
+    "errorMessage": "Error al enviar el mensaje. Inténtalo de nuevo."
+  }
+}
