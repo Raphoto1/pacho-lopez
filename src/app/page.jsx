@@ -8,7 +8,7 @@ import HeroVideo from "@/components/header/HeroVideo";
 import CarouselHalf from "@/components/carousel/CarouselHalf";
 import CarouselHalf2 from "@/components/carousel/CarouselHalf2";
 import CarouselBanners from "@/components/carousel/CarouselBanners";
-
+import MusicPlayer from "@/components/musicPlayer/MusicPlayer";
 export default function Home() {
 
   return (
@@ -16,6 +16,7 @@ export default function Home() {
       <HeroVideo />
       <SocialBar />
       <CarouselBanners />
+      <MusicPlayer />
       <CarouselHalf2 />
       <VideoGrid />
     </div>
