@@ -78,6 +78,13 @@ export default function NavBar() {
         </details>
       </div>
 
+      {/* Mobile Logo Centered */}
+      <div className='navbar-center lg:hidden'>
+        <Link href="/">
+          <img className="h-10" src="/icons/Mascota.png" alt="Parcero" />
+        </Link>
+      </div>
+
       {/* Mobile Language Selector */}
       <div className='navbar-end lg:hidden'>
         <div className='flex gap-2 mr-4'>
@@ -91,6 +98,7 @@ export default function NavBar() {
           >
             ES
           </button>
+          
           <button
             onClick={() => switchLocale('en')}
             className={`px-3 py-1 rounded-lg text-sm font-semibold transition-all ${
@@ -106,7 +114,9 @@ export default function NavBar() {
 
       {/* Desktop Menu */}
       <div className='hidden lg:flex w-full justify-between items-center'>
-        <div className='flex-1'></div>
+        <Link href="/" className='flex-1 pl-5'>
+          <img className="h-10" src="/icons/Mascota.png" alt="Parcero" />
+        </Link>
         <ul className='menu menu-horizontal flex justify-around'>
           {menuItems.map((item, index) => (
             <li key={index}>
