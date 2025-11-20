@@ -25,11 +25,11 @@ export default function CarouselPhotos({ carouselImages }) {
           className="carousel-container"
         >
           {carouselImages.map((image) => (
-            <div key={image.id} className='h-screen'>
+            <div key={image.id} className='h-screen flex items-center justify-center bg-black'>
               <img 
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover"
+                className="max-w-full max-h-full object-contain"
               />
             </div>
           ))}
