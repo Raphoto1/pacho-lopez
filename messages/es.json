@@ -52,5 +52,8 @@
     "submittingButton": "Enviando...",
     "successMessage": "¡Mensaje enviado correctamente!",
     "errorMessage": "Error al enviar el mensaje. Inténtalo de nuevo."
+  },
+  "Music": {
+    "discography": "Discografía"
   }
 }

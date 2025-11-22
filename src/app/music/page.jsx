@@ -1,10 +1,14 @@
+'use client'
 import React from "react";
 import HeroImage from "@/components/header/HeroImage";
 import MusicPlayer from "@/components/musicPlayer/MusicPlayer";
 import MusicPlayerDisc from "@/components/musicPlayer/MusicPlayerDisc";
 import Disc from "@/components/discography/Disc";
 import HeroImageDynamic from "@/components/header/HeroImageDynamic";
-export default function page() {
+import { useTranslations } from 'next-intl';
+
+export default function Page() {
+  const t = useTranslations('Music');
   return (
     <div>
       <HeroImageDynamic imageUrl={'/img/disc/parceros.jpg'}/>
@@ -12,7 +16,7 @@ export default function page() {
       {/* <MusicPlayerDisc /> */}
       <div>
         <div>
-          <h1 className="text-4xl text-center">Discografia</h1>
+          <h1 className="text-4xl text-center">{t('discography')}</h1>
         </div>
         <Disc
           title='Parceros'
