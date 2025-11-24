@@ -41,7 +41,7 @@ export default function Disc(props) {
             </div>
           </div>
         </div>
-        <MusicPlayerDiscDynamic url={props.url} />
+        {props.url && <MusicPlayerDiscDynamic url={props.url} />}
       </div>
       <div className="extradata">
       </div>
