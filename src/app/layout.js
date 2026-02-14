@@ -23,9 +23,9 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const messages = await getMessages();
-  
+
   return (
-    <html lang='en' data-theme="dark">
+    <html lang='en' data-theme='dark'>
       <head>
         <link rel='stylesheet' href='https://use.typekit.net/ank1ghx.css' />
       </head>
