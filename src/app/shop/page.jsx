@@ -1,6 +1,11 @@
 import React from "react";
 import Carousel2 from "../../components/carousel/CarouselHalf2.jsx";
 import { useTranslations } from 'next-intl';
+
+export const metadata = {
+  title: "Tienda",
+};
+
 export default function page() {
   const t = useTranslations('ShopPage');
   return (

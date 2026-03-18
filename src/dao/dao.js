@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
@@ -62,6 +62,90 @@ export const unsubscribe = async (email) => {
     return result;
   } catch (error) {
     console.error('Error unsubscribing:', error);
+    throw error;
+  }
+};
+
+export const createEventDate = async (eventData) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('eventDates');
+    const { lugar, fecha, ciudad, cartel } = eventData;
+
+    const result = await collection.insertOne({
+      lugar,
+      fecha,
+      ciudad,
+      ...(cartel !== undefined && { cartel }),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    return result;
+  } catch (error) {
+    console.error('Error creating event date:', error);
+    throw error;
+  }
+};
+
+export const getAllEventDates = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('eventDates');
+    const eventDates = await collection.find({}).sort({ createdAt: -1 }).toArray();
+    return eventDates;
+  } catch (error) {
+    console.error('Error getting event dates:', error);
+    throw error;
+  }
+};
+
+export const getEventDateById = async (id) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('eventDates');
+    const eventDate = await collection.findOne({ _id: new ObjectId(id) });
+    return eventDate;
+  } catch (error) {
+    console.error('Error getting event date by id:', error);
+    throw error;
+  }
+};
+
+export const updateEventDate = async (id, eventData) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('eventDates');
+    const { lugar, fecha, ciudad, cartel } = eventData;
+
+    const result = await collection.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          ...(lugar !== undefined && { lugar }),
+          ...(fecha !== undefined && { fecha }),
+          ...(ciudad !== undefined && { ciudad }),
+          ...(cartel !== undefined && { cartel }),
+          updatedAt: new Date()
+        }
+      }
+    );
+
+    return result;
+  } catch (error) {
+    console.error('Error updating event date:', error);
+    throw error;
+  }
+};
+
+export const deleteEventDate = async (id) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('eventDates');
+    const result = await collection.deleteOne({ _id: new ObjectId(id) });
+    return result;
+  } catch (error) {
+    console.error('Error deleting event date:', error);
     throw error;
   }
 };

@@ -2,9 +2,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import Script from "next/script";
 
 import NavBar from "@/components/nav/NavBar";
 import Footer from "@/components/footer/Footer";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +20,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Pacho Lopez Y La Cumbia Mestiza",
+  title: {
+    default: "Pacho Lopez Y La Cumbia Mestiza",
+    template: "%s | Pacho Lopez Y La Cumbia Mestiza",
+  },
   description: "Pacho Lopez Y La Cumbia Mestiza - Sitio Oficial",
 };
 
@@ -29,6 +35,22 @@ export default async function RootLayout({ children }) {
       <head>
         <link rel='stylesheet' href='https://use.typekit.net/ank1ghx.css' />
       </head>
+      {GA_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_ID}');
+            `}
+          </Script>
+        </>
+      )}
       <NextIntlClientProvider messages={messages}>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
           <NavBar />
