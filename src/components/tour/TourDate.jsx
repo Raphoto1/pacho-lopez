@@ -34,7 +34,7 @@ export default function TourDate({ lugar, rawFecha, ciudad, cartel, soldOut, buy
         />
 
         {soldOut && (
-          <div className='absolute inset-0 bg-gradient-to-r from-error/90 via-error/80 to-transparent opacity-95 flex items-center justify-center transform -skew-x-12'>
+          <div className='absolute inset-0 bg-linear-to-r from-error/90 via-error/80 to-transparent opacity-95 flex items-center justify-center transform -skew-x-12'>
             <div className='text-center text-white drop-shadow-lg'>
               <p className='text-3xl font-bold mb-2'>{t("soldOut")}</p>
               <p className='text-sm md:text-base font-semibold'>{t("thankYouForBelieving")}</p>
@@ -43,7 +43,7 @@ export default function TourDate({ lugar, rawFecha, ciudad, cartel, soldOut, buy
         )}
 
         {!soldOut && eventPassed && (
-          <div className='absolute inset-0 bg-gradient-to-r from-success/90 via-success/80 to-transparent opacity-95 flex items-center justify-center transform -skew-x-12'>
+          <div className='absolute inset-0 bg-linear-to-r from-success/90 via-success/80 to-transparent opacity-95 flex items-center justify-center transform -skew-x-12'>
             <div className='text-center text-white drop-shadow-lg'>
               <p className='text-3xl font-bold mb-2'>{t("eventPassed")}</p>
               <p className='text-sm md:text-base font-semibold'>{t("joinUsNextTime")}</p>

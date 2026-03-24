@@ -68,7 +68,7 @@ export default function NavBar() {
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h8m-8 6h16' />{" "}
             </svg>
           </summary>
-          <ul className='menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow'>
+          <ul className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'>
             {menuItems.map((item, index) => (
               <li key={index}>
                 <Link href={item.link} className="uppercase">{item.title}</Link>
