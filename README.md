@@ -34,3 +34,34 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## NextAuth (Auth.js) setup
+
+The project is now prepared with Auth.js (`next-auth`) using a Credentials provider.
+
+1. Copy `.env.example` values into `.env.local` and set secure values:
+
+```bash
+NEXTAUTH_SECRET=your-long-random-secret
+NEXTAUTH_URL=http://localhost:3000
+ADMIN_USER=admin
+ADMIN_PASSWORD=your-strong-password
+```
+
+2. Run the project:
+
+```bash
+npm run dev
+```
+
+3. Open `/admin` to sign in with the configured credentials.
+
+Protected routes:
+
+- `/api/admin/*` requires an authenticated session (returns `401` when unauthenticated).
+
+Main auth files:
+
+- `src/auth.js`
+- `src/app/api/auth/[...nextauth]/route.js`
+- `src/middleware.js`

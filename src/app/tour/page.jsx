@@ -10,7 +10,7 @@ export default function page() {
   return (
     <div>
       <HeroImage imageUrl='/img/posters/posterWide.png' />
-      {/* <ToursGrid /> */}
+      <ToursGrid />
     </div>
   );
 }

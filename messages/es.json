@@ -55,5 +55,16 @@
   },
   "Music": {
     "discography": "Discografía"
+  },
+  "Tour": {
+    "upcomingDates": "Próximas Fechas",
+    "upcomingDatesDescription": "¡No te pierdas nuestras próximas presentaciones! Consulta las fechas y lugares de nuestros conciertos.",
+    "noPublishedDates": "No hay fechas publicadas por el momento.",
+    "soldOut": "Agotado",
+    "live": "En vivo",
+    "thankYouForBelieving": "Gracias por creer",
+    "eventPassed": "Evento Realizado",
+    "joinUsNextTime": "Gracias, acompáñanos en las próximas fechas",
+    "buyTickets": "Comprar Boletas"
   }
 }

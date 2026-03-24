@@ -15,8 +15,11 @@ export default function Footer() {
           <SocialBar />
         </div>
       </div>
-      <div>
-        Developed By <Link href="https://creativerafa.com">CreativeRafa</Link>
+      <div className="flex flex-col items-center">
+        <div>
+          Developed By <Link href="https://creativerafa.com">CreativeRafa</Link>
+        </div>
+        <Link className="ml-2 button" href="/login">admin</Link>
       </div>
     </footer>
   );

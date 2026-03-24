@@ -70,13 +70,15 @@ export const createEventDate = async (eventData) => {
   try {
     const database = await connectDB();
     const collection = database.collection('eventDates');
-    const { lugar, fecha, ciudad, cartel } = eventData;
+    const { lugar, fecha, ciudad, cartel, soldOut, buyLink } = eventData;
 
     const result = await collection.insertOne({
       lugar,
       fecha,
       ciudad,
       ...(cartel !== undefined && { cartel }),
+      ...(buyLink !== undefined && buyLink && { buyLink }),
+      soldOut: Boolean(soldOut),
       createdAt: new Date(),
       updatedAt: new Date()
     });
@@ -116,7 +118,7 @@ export const updateEventDate = async (id, eventData) => {
   try {
     const database = await connectDB();
     const collection = database.collection('eventDates');
-    const { lugar, fecha, ciudad, cartel } = eventData;
+    const { lugar, fecha, ciudad, cartel, soldOut, buyLink } = eventData;
 
     const result = await collection.updateOne(
       { _id: new ObjectId(id) },
@@ -126,6 +128,8 @@ export const updateEventDate = async (id, eventData) => {
           ...(fecha !== undefined && { fecha }),
           ...(ciudad !== undefined && { ciudad }),
           ...(cartel !== undefined && { cartel }),
+          ...(buyLink !== undefined && { buyLink }),
+          ...(soldOut !== undefined && { soldOut: Boolean(soldOut) }),
           updatedAt: new Date()
         }
       }

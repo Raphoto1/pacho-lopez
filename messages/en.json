@@ -55,5 +55,16 @@
   },
   "Music": {
     "discography": "Discography"
+  },
+  "Tour": {
+    "upcomingDates": "Upcoming Dates",
+    "upcomingDatesDescription": "Don't miss our next performances! Check out the dates and locations of our concerts.",
+    "noPublishedDates": "No dates published at this time.",
+    "soldOut": "Sold Out",
+    "live": "Live",
+    "thankYouForBelieving": "Thank you for believing",
+    "eventPassed": "Event Held",
+    "joinUsNextTime": "Thank you, join us at our upcoming dates",
+    "buyTickets": "Buy Tickets"
   }
 }

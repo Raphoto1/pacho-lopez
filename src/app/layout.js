@@ -3,6 +3,7 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Script from "next/script";
+import AuthSessionProvider from "@/components/providers/AuthSessionProvider";
 
 import NavBar from "@/components/nav/NavBar";
 import Footer from "@/components/footer/Footer";
@@ -51,13 +52,15 @@ export default async function RootLayout({ children }) {
           </Script>
         </>
       )}
-      <NextIntlClientProvider messages={messages}>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
-          <NavBar />
-          <main className='flex-1 lg:pt-16'>{children}</main>
-          <Footer />
-        </body>
-      </NextIntlClientProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
+        <NextIntlClientProvider messages={messages}>
+          <AuthSessionProvider>
+            <NavBar />
+            <main className='flex-1 lg:pt-16'>{children}</main>
+            <Footer />
+          </AuthSessionProvider>
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

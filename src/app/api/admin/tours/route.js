@@ -8,7 +8,7 @@ import {
 } from "@/dao/dao";
 
 const requiredFields = ["lugar", "fecha", "ciudad"];
-const allowedFields = ["lugar", "fecha", "ciudad", "cartel"];
+const allowedFields = ["lugar", "fecha", "ciudad", "cartel", "soldOut", "buyLink"];
 
 const hasAllRequiredFields = (payload) => {
 	return requiredFields.every((field) => payload?.[field]);
@@ -70,7 +70,7 @@ export async function PUT(request) {
 
 		if (!hasAnyAllowedField) {
 			return NextResponse.json(
-				{ message: "At least one field is required: lugar, fecha, ciudad, cartel" },
+				{ message: "At least one field is required: lugar, fecha, ciudad, cartel, soldOut, buyLink" },
 				{ status: 400 }
 			);
 		}
