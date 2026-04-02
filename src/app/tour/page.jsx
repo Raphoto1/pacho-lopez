@@ -9,7 +9,7 @@ export const metadata = {
 export default function page() {
   return (
     <div>
-      <HeroImage imageUrl='/img/posters/poster nuevo.jpg' />
+      <HeroImage imageUrl='/img/posters/mayo23.jpg' />
       <ToursGrid />
     </div>
   );
