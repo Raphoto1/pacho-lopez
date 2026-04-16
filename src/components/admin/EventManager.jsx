@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 
 const initialForm = {
   lugar: "",
@@ -18,6 +19,9 @@ export default function EventManager() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState({ type: "", message: "" });
+  const [cartelMode, setCartelMode] = useState("url"); // "url" | "file"
+  const [cartelPreview, setCartelPreview] = useState(null);
+  const cartelFileRef = useRef(null);
 
   const isEditing = useMemo(() => Boolean(editingId), [editingId]);
 
@@ -49,6 +53,9 @@ export default function EventManager() {
   const resetForm = () => {
     setFormData(initialForm);
     setEditingId("");
+    setCartelMode("url");
+    setCartelPreview(null);
+    if (cartelFileRef.current) cartelFileRef.current.value = "";
   };
 
   const handleInputChange = (event) => {
@@ -59,16 +66,46 @@ export default function EventManager() {
     }));
   };
 
+  const handleCartelFileChange = (e) => {
+    const file = e.target.files?.[0];
+    setCartelPreview(file ? URL.createObjectURL(file) : null);
+    // clear the URL field when a file is chosen
+    setFormData((prev) => ({ ...prev, cartel: "" }));
+  };
+
+  const uploadCartelFile = async () => {
+    const file = cartelFileRef.current?.files?.[0];
+    if (!file) return null;
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("folder", "tour");
+    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data?.message || "Error al subir el cartel");
+    return data.url;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
     setFeedback({ type: "", message: "" });
 
+    let cartelUrl = formData.cartel.trim();
+    if (cartelMode === "file") {
+      try {
+        cartelUrl = await uploadCartelFile() ?? "";
+      } catch (err) {
+        setFeedback({ type: "error", message: err.message });
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     const payload = {
       lugar: formData.lugar.trim(),
       fecha: formData.fecha.trim(),
       ciudad: formData.ciudad.trim(),
-      cartel: formData.cartel.trim(),
+      cartel: cartelUrl,
       buyLink: formData.buyLink.trim(),
       soldOut: Boolean(formData.soldOut)
     };
@@ -201,16 +238,51 @@ export default function EventManager() {
           />
         </label>
 
-        <label className='form-control'>
+        <div className='form-control'>
           <span className='label-text mb-2'>Cartel (opcional)</span>
-          <input
-            name='cartel'
-            value={formData.cartel}
-            onChange={handleInputChange}
-            className='input input-bordered w-full'
-            placeholder='URL o referencia'
-          />
-        </label>
+          <div className='tabs tabs-box w-fit mb-2'>
+            <button
+              type='button'
+              className={`tab tab-sm ${cartelMode === "url" ? "tab-active" : ""}`}
+              onClick={() => { setCartelMode("url"); setCartelPreview(null); if (cartelFileRef.current) cartelFileRef.current.value = ""; }}
+            >
+              URL
+            </button>
+            <button
+              type='button'
+              className={`tab tab-sm ${cartelMode === "file" ? "tab-active" : ""}`}
+              onClick={() => { setCartelMode("file"); setFormData((prev) => ({ ...prev, cartel: "" })); }}
+            >
+              Subir archivo
+            </button>
+          </div>
+
+          {cartelMode === "url" ? (
+            <input
+              name='cartel'
+              value={formData.cartel}
+              onChange={handleInputChange}
+              className='input input-bordered w-full'
+              placeholder='https://... o referencia'
+              type='url'
+            />
+          ) : (
+            <div className='flex flex-col gap-2'>
+              <input
+                ref={cartelFileRef}
+                type='file'
+                accept='image/jpeg,image/png,image/webp,image/gif'
+                className='file-input file-input-bordered w-full'
+                onChange={handleCartelFileChange}
+              />
+              {cartelPreview && (
+                <div className='relative w-24 h-36 rounded-lg overflow-hidden border border-base-content/20 mt-1'>
+                  <Image src={cartelPreview} alt='Preview cartel' fill className='object-cover' />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         <label className='form-control'>
           <span className='label-text mb-2'>Link de compra de boletas (opcional)</span>
@@ -287,7 +359,11 @@ export default function EventManager() {
                     <td>{eventDate?.lugar || "-"}</td>
                     <td>{eventDate?.fecha || "-"}</td>
                     <td>{eventDate?.ciudad || "-"}</td>
-                    <td>{eventDate?.cartel || "-"}</td>
+                    <td>
+                      {eventDate?.cartel ? (
+                        <a href={eventDate.cartel} target='_blank' rel='noopener noreferrer' className='link link-primary text-xs'>Ver</a>
+                      ) : "-"}
+                    </td>
                     <td>
                       {eventDate?.buyLink ? (
                         <a href={eventDate.buyLink} target='_blank' rel='noopener noreferrer' className='link link-primary text-xs'>

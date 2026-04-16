@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/auth";
 import SignOutButton from "@/components/auth/SignOutButton";
 import EventManager from "@/components/admin/EventManager";
+import PosterTourManager from "@/components/admin/PosterTourManager";
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
@@ -19,6 +20,7 @@ export default async function AdminPage() {
         <SignOutButton />
       </div>
       <EventManager />
+      <PosterTourManager />
     </section>
   );
 }

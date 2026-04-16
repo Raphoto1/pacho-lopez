@@ -153,3 +153,64 @@ export const deleteEventDate = async (id) => {
     throw error;
   }
 };
+
+// ── Posters ──────────────────────────────────────────────────────────────────
+
+export const createPoster = async ({ filename, url, title }) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('posters');
+    const result = await collection.insertOne({
+      filename,
+      url,
+      title: title || '',
+      createdAt: new Date(),
+    });
+    return result;
+  } catch (error) {
+    console.error('Error creating poster:', error);
+    throw error;
+  }
+};
+
+export const getAllPosters = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('posters');
+    const posters = await collection.find({}).sort({ createdAt: -1 }).toArray();
+    return posters;
+  } catch (error) {
+    console.error('Error getting posters:', error);
+    throw error;
+  }
+};
+
+export const deletePoster = async (id) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('posters');
+    const poster = await collection.findOne({ _id: new ObjectId(id) });
+    if (!poster) return null;
+    await collection.deleteOne({ _id: new ObjectId(id) });
+    return poster;
+  } catch (error) {
+    console.error('Error deleting poster:', error);
+    throw error;
+  }
+};
+
+// Returns all posters and removes them all from the collection
+export const popAllPosters = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('posters');
+    const posters = await collection.find({}).toArray();
+    if (posters.length > 0) {
+      await collection.deleteMany({});
+    }
+    return posters;
+  } catch (error) {
+    console.error('Error popping all posters:', error);
+    throw error;
+  }
+};
