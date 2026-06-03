@@ -1,7 +1,7 @@
 import React from "react";
 import HeroImage from "@/components/header/HeroImage";
 import ToursGrid from "@/components/tour/ToursGrid";
-import { getAllPosters } from "@/dao/dao";
+import { getAllEventDates } from "@/dao/dao";
 
 export const metadata = {
   title: "Tour",
@@ -9,11 +9,20 @@ export const metadata = {
 
 export default async function page() {
   let heroUrl = "/img/posters/mayo23.jpg";
+  let heroGallery = [];
 
   try {
-    const posters = await getAllPosters();
-    if (posters.length > 0) {
-      heroUrl = posters[0].url;
+    const eventDates = await getAllEventDates();
+    heroGallery = Array.from(
+      new Set(
+        eventDates
+          .map((eventDate) => eventDate?.cartel)
+          .filter((url) => typeof url === "string" && url.trim())
+      )
+    );
+
+    if (heroGallery.length > 0) {
+      heroUrl = heroGallery[0];
     }
   } catch {
     // fallback to default
@@ -21,7 +30,7 @@ export default async function page() {
 
   return (
     <div>
-      <HeroImage imageUrl={heroUrl} />
+      <HeroImage imageUrl={heroUrl} imageUrls={heroGallery} />
       <ToursGrid />
     </div>
   );

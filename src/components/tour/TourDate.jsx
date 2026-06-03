@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 
 export default function TourDate({ lugar, rawFecha, ciudad, cartel, soldOut, buyLink }) {
   const t = useTranslations("Tour");
   const locale = useLocale();
   const posterSrc = cartel || "/img/posters/posterWide.png";
+  const [isPosterOpen, setIsPosterOpen] = useState(false);
 
   // Parsear y comparar fecha cruda (formato YYYY-MM-DD o ISO)
   const dateObj = rawFecha ? new Date(rawFecha.slice(0, 10) + "T00:00:00") : null;
@@ -23,13 +24,40 @@ export default function TourDate({ lugar, rawFecha, ciudad, cartel, soldOut, buy
       })
     : rawFecha || "Fecha por confirmar";
 
+  const openPoster = () => setIsPosterOpen(true);
+  const closePoster = () => setIsPosterOpen(false);
+
+  const handleCardKeyDown = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openPoster();
+    }
+  };
+
+  const closeLabel = locale === "en" ? "Close" : "Cerrar";
+  const viewPosterLabel = locale === "en" ? "View poster" : "Ver poster";
+
   return (
-    <article className={`card group bg-base-100 shadow-xl border overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl focus-within:-translate-y-1 focus-within:shadow-2xl ${soldOut || eventPassed ? "border-error/40" : "border-base-content/10 hover:border-primary/40"}`}>
+    <>
+      <article
+        className={`card group bg-base-100 shadow-xl border overflow-hidden transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl focus-within:-translate-y-1 focus-within:shadow-2xl cursor-zoom-in ${soldOut || eventPassed ? "border-error/40" : "border-base-content/10 hover:border-primary/40"}`}
+        role='button'
+        tabIndex={0}
+        onClick={openPoster}
+        onKeyDown={handleCardKeyDown}
+        aria-label={`${viewPosterLabel}: ${lugar}`}
+      >
       <figure className='relative h-56 bg-base-200 overflow-hidden'>
         <img
           src={posterSrc}
           alt={`Poster del evento en ${lugar}`}
-          className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 hover:scale-105 ${soldOut || eventPassed ? "grayscale" : ""}`}
+          className={`h-full w-full object-cover scale-110 blur-md brightness-50 transition-transform duration-700 ease-out group-hover:scale-105 hover:scale-105 ${soldOut || eventPassed ? "grayscale" : ""}`}
+          loading='lazy'
+        />
+        <img
+          src={posterSrc}
+          alt={`Poster del evento en ${lugar}`}
+          className={`absolute inset-0 h-full w-full object-contain p-2 transition-transform duration-700 ease-out group-hover:scale-[1.02] hover:scale-[1.02] ${soldOut || eventPassed ? "grayscale" : ""}`}
           loading='lazy'
         />
 
@@ -64,11 +92,44 @@ export default function TourDate({ lugar, rawFecha, ciudad, cartel, soldOut, buy
         <p className='text-base-content/80'>{ciudad}</p>
 
         {!soldOut && !eventPassed && buyLink && (
-          <a href={buyLink} target='_blank' rel='noopener noreferrer' className='btn btn-primary btn-sm mt-2'>
+          <a
+            href={buyLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='btn btn-primary btn-sm mt-2'
+            onClick={(event) => event.stopPropagation()}
+          >
             {t('buyTickets')}
           </a>
         )}
       </div>
-    </article>
+      </article>
+
+      {isPosterOpen && (
+        <div
+          className='fixed inset-0 z-50 bg-black/80 p-4 md:p-8 flex items-center justify-center'
+          onClick={closePoster}
+          role='dialog'
+          aria-modal='true'
+          aria-label={`${viewPosterLabel}: ${lugar}`}
+        >
+          <div className='relative w-full max-w-4xl max-h-[90vh]' onClick={(event) => event.stopPropagation()}>
+            <button
+              type='button'
+              className='btn btn-sm btn-circle btn-neutral absolute -top-3 -right-3 z-10'
+              onClick={closePoster}
+              aria-label={closeLabel}
+            >
+              x
+            </button>
+            <img
+              src={posterSrc}
+              alt={`Poster del evento en ${lugar}`}
+              className='w-full h-auto max-h-[90vh] object-contain rounded-xl shadow-2xl bg-black/20'
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }

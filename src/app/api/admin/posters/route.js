@@ -68,7 +68,10 @@ export async function POST(request) {
 
     const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
     if (file.size > MAX_SIZE) {
-      return NextResponse.json({ message: "El archivo supera el límite de 10 MB." }, { status: 400 });
+      return NextResponse.json(
+        { message: "Archivo muy grande. El tamano maximo permitido es 10 MB." },
+        { status: 400 }
+      );
     }
 
     const safeName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;

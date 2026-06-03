@@ -6,7 +6,25 @@ const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
 
 export async function POST(request) {
   try {
-    const formData = await request.formData();
+    const contentLength = Number(request.headers.get("content-length") || 0);
+
+    if (Number.isFinite(contentLength) && contentLength > MAX_SIZE + 1024 * 1024) {
+      return NextResponse.json(
+        { message: "Archivo muy grande. El tamano maximo permitido es 10 MB." },
+        { status: 413 }
+      );
+    }
+
+    let formData;
+    try {
+      formData = await request.formData();
+    } catch {
+      return NextResponse.json(
+        { message: "No se pudo procesar el archivo. Verifica el archivo enviado." },
+        { status: 400 }
+      );
+    }
+
     const file = formData.get("file");
     const folder = formData.get("folder") || "admin";
 
@@ -22,7 +40,10 @@ export async function POST(request) {
     }
 
     if (file.size > MAX_SIZE) {
-      return NextResponse.json({ message: "El archivo supera el límite de 10 MB." }, { status: 400 });
+      return NextResponse.json(
+        { message: "Archivo muy grande. El tamano maximo permitido es 10 MB." },
+        { status: 400 }
+      );
     }
 
     const validFolder = BLOB_FOLDERS[folder] ?? BLOB_FOLDERS.admin;
