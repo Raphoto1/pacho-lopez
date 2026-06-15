@@ -4,6 +4,7 @@ import { authOptions } from "@/auth";
 import SignOutButton from "@/components/auth/SignOutButton";
 import EventManager from "@/components/admin/EventManager";
 import PosterTourManager from "@/components/admin/PosterTourManager";
+import HeroVideoManager from "@/components/admin/HeroVideoManager";
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
@@ -19,6 +20,7 @@ export default async function AdminPage() {
         <p className='mb-6'>Sesión iniciada como {session.user.name}</p>
         <SignOutButton />
       </div>
+      <HeroVideoManager />
       <EventManager />
       <PosterTourManager />
     </section>

@@ -8,7 +8,39 @@ import { SiAmazonmusic } from "react-icons/si";
 import { RiSoundcloudLine } from "react-icons/ri";
 import { FaDeezer } from "react-icons/fa";
 import { FiYoutube } from "react-icons/fi";
-export default function HeroImage() {
+
+function buildYoutubeEmbedUrl(urlString) {
+  if (!urlString) return null;
+
+  try {
+    const url = new URL(urlString);
+    const host = url.hostname.replace("www.", "").toLowerCase();
+    let videoId = "";
+
+    if (host === "youtu.be") {
+      videoId = url.pathname.split("/").filter(Boolean)[0] || "";
+    } else if (host === "youtube.com" || host === "m.youtube.com") {
+      if (url.pathname === "/watch") {
+        videoId = url.searchParams.get("v") || "";
+      } else if (url.pathname.startsWith("/embed/") || url.pathname.startsWith("/shorts/")) {
+        const parts = url.pathname.split("/").filter(Boolean);
+        videoId = parts[1] || "";
+      }
+    }
+
+    if (!videoId) return null;
+
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+  } catch {
+    return null;
+  }
+}
+
+export default function HeroVideo({ youtubeUrl }) {
+  const embedUrl =
+    buildYoutubeEmbedUrl(youtubeUrl) ||
+    "https://www.youtube.com/embed/ZayjGIRxHT4?si=3s11dBF-yOfExcvr";
+
   return (
     <section
       className='hero min-h-screen'
@@ -20,7 +52,7 @@ export default function HeroImage() {
           className='w-full h-screen'
           width='560'
           height='315'
-          src='https://www.youtube.com/embed/ZayjGIRxHT4?si=3s11dBF-yOfExcvr'
+          src={embedUrl}
           title='YouTube video player'
           allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
           referrerPolicy='strict-origin-when-cross-origin'

@@ -7,7 +7,11 @@ import MusicPlayer from "@/components/musicPlayer/MusicPlayer";
 import MusicPlayerDisc from "@/components/musicPlayer/MusicPlayerDisc";
 import ToursGrid from "@/components/tour/ToursGrid";
 import CarouselPhotos from "@/components/carousel/CarouselPhotos";
-export default function Home() {
+import { getHeroVideo } from "@/dao/dao";
+
+export default async function Home() {
+  const heroVideo = await getHeroVideo().catch(() => null);
+
   // Generate array for all 52 photos in carousel3
   const carouselImages = Array.from({ length: 52 }, (_, i) => ({
     id: i,
@@ -17,7 +21,7 @@ export default function Home() {
 
   return (
     <div>
-      <HeroVideo />
+      <HeroVideo youtubeUrl={heroVideo?.url} />
       <SocialBar />
       <MusicPlayerDisc />
       <CarouselBanners />

@@ -214,3 +214,51 @@ export const popAllPosters = async () => {
     throw error;
   }
 };
+
+// ── Hero Video ───────────────────────────────────────────────────────────────
+
+export const setHeroVideo = async (url) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('heroVideo');
+
+    await collection.deleteMany({});
+
+    const result = await collection.insertOne({
+      url,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    return result;
+  } catch (error) {
+    console.error('Error setting hero video:', error);
+    throw error;
+  }
+};
+
+export const getHeroVideo = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('heroVideo');
+
+    const heroVideo = await collection.find({}).sort({ createdAt: -1 }).limit(1).next();
+    return heroVideo;
+  } catch (error) {
+    console.error('Error getting hero video:', error);
+    throw error;
+  }
+};
+
+export const clearHeroVideo = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('heroVideo');
+
+    const result = await collection.deleteMany({});
+    return result;
+  } catch (error) {
+    console.error('Error clearing hero video:', error);
+    throw error;
+  }
+};
