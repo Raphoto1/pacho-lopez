@@ -3,29 +3,10 @@ import React from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
-export default function CarouselBanners() {
-  const carouselImages = [
-    {
-      id: 1,
-      src: "/img/Banners/B1.png",
-      alt: "Pacho López - Slide 1"
-    },
-    {
-      id: 2,
-      src: "/img/Banners/B2.png",
-      alt: "Pacho López - Slide 2"
-    },
-    {
-      id: 3,
-      src: "/img/Banners/B3.png",
-      alt: "Pacho López - Slide 3"
-    },
-    {
-      id: 4,
-      src: "/img/Banners/B4.png",
-      alt: "Pacho López - Slide 4"
-    },
-  ];
+export default function CarouselBanners({ carouselImages }) {
+  if (!Array.isArray(carouselImages) || carouselImages.length === 0) {
+    return null;
+  }
 
   return (
     <div className="relative">
@@ -47,11 +28,11 @@ export default function CarouselBanners() {
           centerMode={false}
           className="carousel-container"
         >
-          {carouselImages.map((image) => (
-            <div key={image.id}>
+          {carouselImages.map((image, index) => (
+            <div key={image.id || image.src || index}>
               <img 
                 src={image.src}
-                alt={image.alt}
+                alt={image.alt || `Pacho Lopez - Banner ${index + 1}`}
                 className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg mx-2"
               />
             </div>

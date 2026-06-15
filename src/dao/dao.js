@@ -371,3 +371,112 @@ export const updateCarouselPhotosOrder = async (orderedIds) => {
     throw error;
   }
 };
+
+// ── Carousel Banners ───────────────────────────────────────────────────────
+
+export const createCarouselBannersBatch = async (banners) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselBanners');
+
+    if (!Array.isArray(banners) || banners.length === 0) {
+      return { insertedCount: 0, insertedIds: [] };
+    }
+
+    const now = new Date();
+    const docs = banners.map((banner, index) => ({
+      filename: banner.filename,
+      url: banner.url,
+      title: banner.title || '',
+      batchId: banner.batchId || null,
+      position: Number.isFinite(banner.position) ? banner.position : index,
+      createdAt: now,
+      updatedAt: now,
+    }));
+
+    const result = await collection.insertMany(docs);
+    return result;
+  } catch (error) {
+    console.error('Error creating carousel banners batch:', error);
+    throw error;
+  }
+};
+
+export const getAllCarouselBanners = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselBanners');
+
+    const banners = await collection
+      .find({})
+      .sort({ createdAt: 1, position: 1 })
+      .toArray();
+
+    return banners;
+  } catch (error) {
+    console.error('Error getting carousel banners:', error);
+    throw error;
+  }
+};
+
+export const deleteCarouselBanner = async (id) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselBanners');
+    const banner = await collection.findOne({ _id: new ObjectId(id) });
+
+    if (!banner) return null;
+
+    await collection.deleteOne({ _id: new ObjectId(id) });
+    return banner;
+  } catch (error) {
+    console.error('Error deleting carousel banner:', error);
+    throw error;
+  }
+};
+
+export const popAllCarouselBanners = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselBanners');
+    const banners = await collection.find({}).toArray();
+
+    if (banners.length > 0) {
+      await collection.deleteMany({});
+    }
+
+    return banners;
+  } catch (error) {
+    console.error('Error clearing carousel banners:', error);
+    throw error;
+  }
+};
+
+export const updateCarouselBannersOrder = async (orderedIds) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselBanners');
+
+    if (!Array.isArray(orderedIds) || orderedIds.length === 0) {
+      return { modifiedCount: 0 };
+    }
+
+    const operations = orderedIds.map((id, index) => ({
+      updateOne: {
+        filter: { _id: new ObjectId(id) },
+        update: {
+          $set: {
+            position: index,
+            updatedAt: new Date(),
+          },
+        },
+      },
+    }));
+
+    const result = await collection.bulkWrite(operations, { ordered: true });
+    return result;
+  } catch (error) {
+    console.error('Error updating carousel banners order:', error);
+    throw error;
+  }
+};

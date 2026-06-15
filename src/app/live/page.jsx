@@ -1,22 +1,24 @@
 import React from "react";
 import CarouselPhotos from "../../components/carousel/CarouselPhotos.jsx";
 import MusicPlayer from "@/components/musicPlayer/MusicPlayer";
+import { getAllCarouselPhotos } from "@/dao/dao";
 
 export const metadata = {
   title: "Live",
 };
 
-export default function page() {
-  // Generate array for all 52 photos in carousel3
-  const carouselImages = Array.from({ length: 52 }, (_, i) => ({
-    id: i,
-    src: `/img/photos/carousel3/ph${i}.JPG`,
-    alt: `Pacho López Live - Photo ${i + 1}`,
+export default async function page() {
+  const carouselPhotos = await getAllCarouselPhotos().catch(() => []);
+
+  const carouselImages = carouselPhotos.map((photo, index) => ({
+    id: String(photo._id),
+    src: photo.url,
+    alt: photo.title || `Pacho Lopez Live - Photo ${index + 1}`,
   }));
 
   return (
     <div>
-      <CarouselPhotos carouselImages={carouselImages} />
+      {carouselImages.length > 0 && <CarouselPhotos carouselImages={carouselImages} />}
       <MusicPlayer />
     </div>
   );
