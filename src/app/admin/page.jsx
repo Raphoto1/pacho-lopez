@@ -5,6 +5,7 @@ import SignOutButton from "@/components/auth/SignOutButton";
 import EventManager from "@/components/admin/EventManager";
 import PosterTourManager from "@/components/admin/PosterTourManager";
 import HeroVideoManager from "@/components/admin/HeroVideoManager";
+import CarouselPhotosManager from "@/components/admin/CarouselPhotosManager";
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
@@ -21,6 +22,7 @@ export default async function AdminPage() {
         <SignOutButton />
       </div>
       <HeroVideoManager />
+      <CarouselPhotosManager />
       <EventManager />
       <PosterTourManager />
     </section>

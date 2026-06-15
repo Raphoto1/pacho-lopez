@@ -7,16 +7,16 @@ import MusicPlayer from "@/components/musicPlayer/MusicPlayer";
 import MusicPlayerDisc from "@/components/musicPlayer/MusicPlayerDisc";
 import ToursGrid from "@/components/tour/ToursGrid";
 import CarouselPhotos from "@/components/carousel/CarouselPhotos";
-import { getHeroVideo } from "@/dao/dao";
+import { getAllCarouselPhotos, getHeroVideo } from "@/dao/dao";
 
 export default async function Home() {
   const heroVideo = await getHeroVideo().catch(() => null);
+  const carouselPhotos = await getAllCarouselPhotos().catch(() => []);
 
-  // Generate array for all 52 photos in carousel3
-  const carouselImages = Array.from({ length: 52 }, (_, i) => ({
-    id: i,
-    src: `/img/photos/carousel3/ph${i}.JPG`,
-    alt: `Pacho López Live - Photo ${i + 1}`,
+  const carouselImages = carouselPhotos.map((photo, index) => ({
+    id: String(photo._id),
+    src: photo.url,
+    alt: photo.title || `Pacho Lopez Live - Photo ${index + 1}`,
   }));
 
   return (
@@ -29,7 +29,7 @@ export default async function Home() {
       {/* <CarouselHalf2 /> */}
       <VideoGrid />
       <ToursGrid />
-      <CarouselPhotos carouselImages={carouselImages} />
+      {carouselImages.length > 0 && <CarouselPhotos carouselImages={carouselImages} />}
     </div>
   );
 }

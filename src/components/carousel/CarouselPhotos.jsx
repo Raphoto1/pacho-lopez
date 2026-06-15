@@ -4,6 +4,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 export default function CarouselPhotos({ carouselImages }) {
+  if (!Array.isArray(carouselImages) || carouselImages.length === 0) {
+    return null;
+  }
+
   return (
     <div className="relative w-screen h-screen">
       {/* Carousel */}
@@ -24,11 +28,11 @@ export default function CarouselPhotos({ carouselImages }) {
           centerMode={false}
           className="carousel-container"
         >
-          {carouselImages.map((image) => (
-            <div key={image.id} className='h-screen flex items-center justify-center bg-black'>
+          {carouselImages.map((image, index) => (
+            <div key={image.id || image.src || index} className='h-screen flex items-center justify-center bg-black'>
               <img 
                 src={image.src}
-                alt={image.alt}
+                alt={image.alt || `Carousel photo ${index + 1}`}
                 className="max-w-full max-h-full object-contain"
               />
             </div>

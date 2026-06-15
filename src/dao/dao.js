@@ -262,3 +262,112 @@ export const clearHeroVideo = async () => {
     throw error;
   }
 };
+
+// ── Carousel Photos ─────────────────────────────────────────────────────────
+
+export const createCarouselPhotosBatch = async (photos) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselPhotos');
+
+    if (!Array.isArray(photos) || photos.length === 0) {
+      return { insertedCount: 0, insertedIds: [] };
+    }
+
+    const now = new Date();
+    const docs = photos.map((photo, index) => ({
+      filename: photo.filename,
+      url: photo.url,
+      title: photo.title || '',
+      batchId: photo.batchId || null,
+      position: Number.isFinite(photo.position) ? photo.position : index,
+      createdAt: now,
+      updatedAt: now,
+    }));
+
+    const result = await collection.insertMany(docs);
+    return result;
+  } catch (error) {
+    console.error('Error creating carousel photos batch:', error);
+    throw error;
+  }
+};
+
+export const getAllCarouselPhotos = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselPhotos');
+
+    const photos = await collection
+      .find({})
+      .sort({ createdAt: 1, position: 1 })
+      .toArray();
+
+    return photos;
+  } catch (error) {
+    console.error('Error getting carousel photos:', error);
+    throw error;
+  }
+};
+
+export const deleteCarouselPhoto = async (id) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselPhotos');
+    const photo = await collection.findOne({ _id: new ObjectId(id) });
+
+    if (!photo) return null;
+
+    await collection.deleteOne({ _id: new ObjectId(id) });
+    return photo;
+  } catch (error) {
+    console.error('Error deleting carousel photo:', error);
+    throw error;
+  }
+};
+
+export const popAllCarouselPhotos = async () => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselPhotos');
+    const photos = await collection.find({}).toArray();
+
+    if (photos.length > 0) {
+      await collection.deleteMany({});
+    }
+
+    return photos;
+  } catch (error) {
+    console.error('Error clearing carousel photos:', error);
+    throw error;
+  }
+};
+
+export const updateCarouselPhotosOrder = async (orderedIds) => {
+  try {
+    const database = await connectDB();
+    const collection = database.collection('carouselPhotos');
+
+    if (!Array.isArray(orderedIds) || orderedIds.length === 0) {
+      return { modifiedCount: 0 };
+    }
+
+    const operations = orderedIds.map((id, index) => ({
+      updateOne: {
+        filter: { _id: new ObjectId(id) },
+        update: {
+          $set: {
+            position: index,
+            updatedAt: new Date(),
+          },
+        },
+      },
+    }));
+
+    const result = await collection.bulkWrite(operations, { ordered: true });
+    return result;
+  } catch (error) {
+    console.error('Error updating carousel photos order:', error);
+    throw error;
+  }
+};
