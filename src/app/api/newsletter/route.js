@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
 import { insertSubscription } from "@/dao/dao";
 import * as XLSX from 'xlsx';
 
@@ -29,65 +31,70 @@ export async function POST(request) {
   }
 }
 
-// export async function GET(request) {
-//   try {
-//     const { getAllSubscriptions } = await import("@/dao/dao");
-//     const subscriptions = await getAllSubscriptions();
+export async function GET(request) {
+  try {
+    const session = await getServerSession(authOptions);
 
-//     // Verificar formato solicitado
-//     const { searchParams } = new URL(request.url);
-//     const format = searchParams.get('format');
+    if (!session?.user) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
 
-//     if (format === 'csv') {
-//       // Generar CSV
-//       const csvHeaders = 'Name,Email,Subscribed At,Active\n';
-//       const csvRows = subscriptions.map(sub => {
-//         const subscribedAt = new Date(sub.subscribedAt).toISOString().split('T')[0];
-//         return `"${sub.name}","${sub.email}","${subscribedAt}","${sub.active}"`;
-//       }).join('\n');
+    const { getAllSubscriptions } = await import("@/dao/dao");
+    const subscriptions = await getAllSubscriptions();
 
-//       const csvContent = csvHeaders + csvRows;
-//       const fileName = `newsletter-subscriptions-${new Date().toISOString().split('T')[0]}.csv`;
+    const { searchParams } = new URL(request.url);
+    const format = searchParams.get("format");
 
-//       return new NextResponse(csvContent, {
-//         status: 200,
-//         headers: {
-//           'Content-Type': 'text/csv',
-//           'Content-Disposition': `attachment; filename="${fileName}"`,
-//         },
-//       });
-//     }
+    if (format === "csv") {
+      const csvHeaders = "Name,Email,Subscribed At,Active\n";
+      const csvRows = subscriptions.map((sub) => {
+        const subscribedAt = new Date(sub.subscribedAt).toISOString().split("T")[0];
+        return `"${sub.name}","${sub.email}","${subscribedAt}","${sub.active}"`;
+      }).join("\n");
 
-//     if (format === 'excel' || format === 'xlsx') {
-//       // Generar Excel
-//       const workbook = XLSX.utils.book_new();
-      
-//       const worksheetData = subscriptions.map(sub => ({
-//         Name: sub.name,
-//         Email: sub.email,
-//         'Subscribed At': new Date(sub.subscribedAt).toISOString().split('T')[0],
-//         Active: sub.active
-//       }));
+      const csvContent = csvHeaders + csvRows;
+      const fileName = `newsletter-subscriptions-${new Date().toISOString().split("T")[0]}.csv`;
 
-//       const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-//       XLSX.utils.book_append_sheet(workbook, worksheet, 'Newsletter Subscriptions');
+      return new NextResponse(csvContent, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/csv; charset=utf-8",
+          "Content-Disposition": `attachment; filename="${fileName}"`
+        }
+      });
+    }
 
-//       const fileName = `newsletter-subscriptions-${new Date().toISOString().split('T')[0]}.xlsx`;
-//       const excelBuffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+    if (format === "excel" || format === "xlsx") {
+      const workbook = XLSX.utils.book_new();
 
-//       return new NextResponse(excelBuffer, {
-//         status: 200,
-//         headers: {
-//           'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-//           'Content-Disposition': `attachment; filename="${fileName}"`,
-//         },
-//       });
-//     }
+      const worksheetData = subscriptions.map((sub) => ({
+        Name: sub.name,
+        Email: sub.email,
+        "Subscribed At": new Date(sub.subscribedAt).toISOString().split("T")[0],
+        Active: sub.active
+      }));
 
-//     // Respuesta JSON por defecto
-//     return NextResponse.json({ subscriptions }, { status: 200 });
-//   } catch (error) {
-//     console.error("Error getting subscriptions:", error);
-//     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
-//   }
-// }
+      const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Newsletter Subscriptions");
+
+      const fileName = `newsletter-subscriptions-${new Date().toISOString().split("T")[0]}.xlsx`;
+      const excelBuffer = XLSX.write(workbook, { type: "buffer", bookType: "xlsx" });
+
+      return new NextResponse(excelBuffer, {
+        status: 200,
+        headers: {
+          "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "Content-Disposition": `attachment; filename="${fileName}"`
+        }
+      });
+    }
+
+    return NextResponse.json(
+      { count: subscriptions.length, subscriptions },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error getting subscriptions:", error);
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  }
+}
