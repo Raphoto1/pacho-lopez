@@ -1,5 +1,5 @@
 import { getAllSubscriptions } from "@/dao/dao";
-
+//newsletter
 export default async function NewsLetterList() {
   let subscribersCount = 0;
   let hasError = false;
