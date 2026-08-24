@@ -4,7 +4,7 @@ import { FaPinterestP } from "react-icons/fa6";
 import { FaTiktok } from "react-icons/fa";
 
 import { AiOutlineSpotify } from "react-icons/ai";
-import { SiAmazonmusic } from "react-icons/si";
+import { FaAmazon } from "react-icons/fa";
 import { RiSoundcloudLine } from "react-icons/ri";
 import { FaDeezer } from "react-icons/fa";
 import { FiYoutube } from "react-icons/fi";
@@ -25,7 +25,7 @@ export default function HeroImageDynamic({ imageUrl }) {
             <AiOutlineSpotify size={25} />
           </a>
           <a href='https://music.amazon.com.mx/tracks/B0CMK45DYK?marketplaceId=A1AM78C64UM0Y8&musicTerritory=MX&ref=dm_sh_Y3f13pVMRr2UjbzeUSnLikQXJ' target='_blank' className='bg-fit bg-gray-800/50 rounded-full p-2'>
-            <SiAmazonmusic size={25} />
+            <FaAmazon size={25} />
           </a>
           <a href='https://soundcloud.com/pacho-lopez-parra/cumbia-mestiza?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing' target='_blank' className='bg-fit bg-gray-800/50 rounded-full p-2'>
             <RiSoundcloudLine size={25} />
